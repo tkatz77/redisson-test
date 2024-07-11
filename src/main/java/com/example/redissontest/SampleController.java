@@ -20,10 +20,6 @@ public class SampleController {
 	@GetMapping("/test")
 	@ResponseBody
 	public String showTest(HttpServletRequest request) {
-		// If testing using tomcat sessions
-		//	HttpSession session = request.getSession(true);
-		//	session.setAttribute("testVar", "testVal");
-
 		RAtomicLong counter = redissonClient.getAtomicLong("test:counter");
 		long curr = counter.incrementAndGet();
 		counter.expire(Duration.ofMinutes(5));
